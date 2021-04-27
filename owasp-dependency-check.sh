@@ -4,9 +4,6 @@ OWASPDC_DIRECTORY="$HOME/OWASP-Dependency-Check"
 DATA_DIRECTORY="$OWASPDC_DIRECTORY/data"
 REPORT_DIRECTORY="$OWASPDC_DIRECTORY/reports"
 
-
-
-# Make sure we are using the latest version
 docker pull owasp/dependency-check
 
 docker run --rm \
@@ -18,5 +15,3 @@ docker run --rm \
     --format "ALL" \
     --project "My OWASP Dependency Check Project" \
     --out /report
-    # Use suppression like this: (/src == $pwd)
-    # --suppression "/src/security/dependency-check-suppression.xml"
