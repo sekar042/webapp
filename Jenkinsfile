@@ -4,7 +4,7 @@ pipeline {
    maven 'Maven'
  }
  stages {
-   stage ('Initialie') {
+   stage ('Initialize') {
    steps {
      sh '''
          echo "PATH = $(PATH)"
