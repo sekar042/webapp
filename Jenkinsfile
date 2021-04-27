@@ -21,15 +21,24 @@ pipeline {
        sh 'cat trufflehog'
 }
 }
-   stage ('Source Composition Analysis'){
-    steps {
-       sh 'rm owasp* || true'
-       sh 'wget https://github.com/sekar042/webapp/blob/master/owasp-dependency-check.sh'
-       sh 'chmod +x owasp-dependency-check.sh'
-       sh 'owasp-dependency-check.sh'
-    }
-} 
 	 
+stage ('Source Composition Analysis'){
+  steps {
+sh 'OWASPDC_DIRECTORY="$HOME/OWASP-Dependency-Check"'
+sh 'DATA_DIRECTORY="$OWASPDC_DIRECTORY/data"'
+sh 'REPORT_DIRECTORY="$OWASPDC_DIRECTORY/reports"'
+sh 'docker run --rm \
+    --volume $(pwd):/src \
+     --volume "$DATA_DIRECTORY":/usr/share/dependency-check/data \
+     --volume "$REPORT_DIRECTORY":/report \
+     owasp/dependency-check \
+     --scan /src \
+     --format "ALL" \
+     --project "My OWASP Dependency Check Project" \
+     --out /report'
+
+}
+} 
 	 
    stage ('Build') {
     steps {
