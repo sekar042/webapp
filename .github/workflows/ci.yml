@@ -30,5 +30,7 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Install Datree
+      run: curl https://get.datree.io | /bin/bash
     - name: Run Datree's policy check
       run: datree test kube.yaml
