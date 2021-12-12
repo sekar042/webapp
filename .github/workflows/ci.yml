@@ -31,4 +31,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Run Datree's policy check
-      run: datree test ~/.datree/k8s-demo.yaml
+      run: datree test kube.yaml
